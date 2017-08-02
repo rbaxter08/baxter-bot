@@ -1,4 +1,5 @@
 const express = require('express');
+const request = require('request');
 const bodyParser = require('body-parser');
 
 let app = express();
@@ -26,3 +27,26 @@ app.post('/hello', (req, res, next) => {
 		return res.status(200).end();
 	}
 });
+
+app.post('/oauth', (req, res, next) => {
+	consol.elog(req.body);
+});
+
+const TOKEN = 'xoxp-26503446353-214024588853-214047871506-82c88ebdbc46753600ea689e9084991e';
+const SCOPE = 'rtm:stream,client';
+const CLIENT_ID = '26503446353.214933754470';
+const CLIENT_SECRET = '49b8fea646167daefd4f535084abd45f';
+const REDIRECT = 'https://baxter-bot.herokuapp.com/';
+const VERIFICATION_TOKEN = 'tkPGmSRMWtxlWjw1rJZ0PsyP';
+
+
+// request.post(`https://slack.com/api/rtm.connect?token=${token}&scope=${scope}`, {}, (err, response, data) => {
+// 	console.log(data);
+// });
+// request({
+// 	method: 'GET',
+// 	url: `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}`
+// }, (err, response, data) => {
+// 	console.log(response);
+// 	console.log(data);
+// });
