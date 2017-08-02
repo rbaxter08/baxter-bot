@@ -16,6 +16,7 @@ app.listen(port, () => {
 });
 
 app.post('/hello', (req, res, next) => {
+	console.log('recieved hello!');
 	let userName = req.body.user_name;
 	let botPayload = {
 		text: `Hello ${userName}`,
