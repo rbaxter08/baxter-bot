@@ -30,10 +30,11 @@ app.post('/hello', (req, res, next) => {
 });
 
 app.post('/oauth', (req, res, next) => {
-	consol.elog(req.body);
+	console.log(req.body);
 });
 
 const TOKEN = 'xoxp-26503446353-214024588853-214047871506-82c88ebdbc46753600ea689e9084991e';
+const TOKEN_BOT ='xoxb-214939346278-FWmSHRdjF1rw91KU0PJAJmQd';
 const SCOPE = 'rtm:stream,client';
 const CLIENT_ID = '26503446353.214933754470';
 const CLIENT_SECRET = '49b8fea646167daefd4f535084abd45f';
