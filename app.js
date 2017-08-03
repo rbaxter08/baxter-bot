@@ -28,7 +28,6 @@ app.listen(port, () => {
 });
 
 app.post('/hello', (req, res, next) => {
-	console.log('recieved hello!');
 	let userName = req.body.user_name;
 	let botPayload = {
 		text: `Hello ${userName}`,
@@ -44,7 +43,9 @@ app.post('/hello', (req, res, next) => {
 function launchWebSOcket() {
 	let url = `https://slack.com/api/rtm.connect?token=${TOKEN_BOT}`;
 	request.post(url, {}, (err, response, data) => {
-		ws = new WebSocket(response.url);
+		let url = response.url;
+		console.log(`Connecting to ws: ${url}`)
+		ws = new WebSocket(url);
 		ws.on('message', (data) => {
 			console.log('New Message!  \n' + data);
 		});
