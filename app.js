@@ -62,7 +62,6 @@ function getStockQuote(ticker) {
 	request.get(url, {}, (err, response, data) => {
 		let d = data.replace('// ', '');
 		let quote = JSON.parse(d)[0];
-		console.log(d);
 		console.log(`\n\n\nquote ${quote}`);
 		replyStock(quote);
 	});
