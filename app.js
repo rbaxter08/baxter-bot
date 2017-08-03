@@ -62,15 +62,13 @@ function getStockQuote(ticker) {
 	request.get(url, {}, (err, response, data) => {
 		let d = data.replace('// ', '');
 		let quote = JSON.parse(d)[0];
-		_.each(quote, (key, value) => {
-			console.log(`key ${key} value ${value}`);
-		});
 		replyStock(quote);
 	});
 }
 
 function replyStock(quote) {
 	let msg = `Ticker: ${quote.t} Current Price: ${quote.l}`;
+	console.log(msg);
 }
 
 launchWebSocket();
