@@ -47,8 +47,8 @@ function launchWebSocket() {
 		console.log(`data = ${data}`);
 		//ws = new WebSocket(url);
 		//ws.on('message', (data) => {
-			console.log('New Message!  \n' + data);
-		});
+		//	console.log('New Message!  \n' + data);
+		//});
 	});
 }
 
