@@ -42,7 +42,7 @@ function launchWebSocket() {
 	let url = `https://slack.com/api/rtm.connect?token=${TOKEN_BOT}`;
 	console.log('Retrieving Web Socket...')
 	request.post(url, {}, (err, response, data) => {
-		let url = data.url;
+		let url = JSON.parse(data).url;
 		ws = new WebSocket(url);
 		ws.on('message', (data) => {
 			console.log('New Message!  \n' + data);
