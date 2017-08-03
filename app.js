@@ -46,6 +46,8 @@ function launchWebSOcket() {
 
 }
 
+launchWebSOcket();
+
 
 
 // request.post(`https://slack.com/api/rtm.connect?token=${token}&scope=${scope}`, {}, (err, response, data) => {
