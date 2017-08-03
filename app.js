@@ -46,7 +46,8 @@ function launchWebSocket() {
 		let url = JSON.parse(data).url;
 		ws = new WebSocket(url);
 		ws.on('message', (res) => {
-			let msg = JSON.parse(res).text;
+			let event = JSON.parse(res);
+			let msg = event.text;
 			if (_.startsWith(msg, '$')) {
 				let regex = new RegExp(/(\$)([a-zA-Z]*)/);
 				let ticker = msg.match(regex)[2];
