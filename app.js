@@ -42,8 +42,9 @@ function launchWebSocket() {
 	let url = `https://slack.com/api/rtm.connect?token=${TOKEN_BOT}`;
 	console.log('Retrieving Web Socket...')
 	request.post(url, {}, (err, response, data) => {
-		let url = response.url;
+		let url = response;
 		console.log(`Connecting to ws: ${url}`)
+		console.log(`data = ${data}`);
 		ws = new WebSocket(url);
 		ws.on('message', (data) => {
 			console.log('New Message!  \n' + data);
