@@ -1,6 +1,7 @@
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
+const io = require('socket.io');
 
 //const TOKEN = 'xoxp-26503446353-214024588853-214047871506-82c88ebdbc46753600ea689e9084991e';
 const TOKEN_BOT ='xoxb-214939346278-FWmSHRdjF1rw91KU0PJAJmQd';
@@ -37,16 +38,15 @@ app.post('/hello', (req, res, next) => {
 	}
 });
 
-app.get('/oauth*', (req, res, next) => {
-	console.log('recieved oauth!');
-	console.log(req);
-	console.log('response:  \n');
-	console.log(res.code);
-});
+function launchWebSOcket() {
+	let url = `https://slack.com/api/rtm.connect?token=${TOKEN_BOT}`;
+	request.post(url, {}, (err, response, data) => {
+		console.log(response);
+	});
 
-function exchangeToken(token) {
-	
 }
+
+
 
 // request.post(`https://slack.com/api/rtm.connect?token=${token}&scope=${scope}`, {}, (err, response, data) => {
 // 	console.log(data);
