@@ -45,7 +45,7 @@ app.get('/oauth', (req, res, next) => {
 function authorizeApp() {
 	let url = `https://slack.com/oauth/authorize?client_id=${CLIENT_ID}&scope=${SCOPE}&redirect_uri=${REDIRECT}`;
 	request.get(url, (err, response, data) => {
-		console.log(response);
+		console.log(data);
 	});
 };
 
