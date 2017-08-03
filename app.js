@@ -52,27 +52,27 @@ function launchWebSocket() {
 			if (_.startsWith(msg, '$')) {
 				let regex = new RegExp(/(\$)([a-zA-Z]*)/);
 				let ticker = msg.match(regex)[2];
-				getStockQuote(ticker);				
+				getStockQuote(ticker, event.channel);				
 			}
 		});
 	});
 }
 
-function getStockQuote(ticker) {
+function getStockQuote(ticker, channel) {
 	console.log(`Sending request for ticker ${ticker}`);
 	let url = `http://finance.google.com/finance/info?client=ig&q=${ticker}`;
 	request.get(url, {}, (err, response, data) => {
 		let d = data.replace('// ', '');
 		let quote = JSON.parse(d)[0];
-		replyStock(quote);
+		replyStock(quote, channel);
 	});
 }
 
-function replyStock(quote) {
+function replyStock(quote, channel) {
 	let msg = `Ticker: ${quote.t} Current Price: ${quote.l}`;
 	console.log(msg);
 
-	let url = `https://slack.com/api/chat.postMessage?token=${TOKEN_BOT}&channel=${}&text=${msg}`;
+	let url = `https://slack.com/api/chat.postMessage?token=${TOKEN_BOT}&channel=${channel}&text=${msg}`;
 }
 
 
