@@ -54,6 +54,7 @@ function launchWebSocket() {
 				let regex = new RegExp(/(\$)([a-zA-Z]*)/);
 				let ticker = msg.match(regex)[2];
 				console.log(`Sending request for ticker ${ticker}`);
+				getStockQuote(ticker);
 				gStocks([ticker]).then(err, data => {
 					console.log(`error!: ${err}`);
 					console.log(`data!: ${data}`);
@@ -64,8 +65,12 @@ function launchWebSocket() {
 	});
 }
 
-function getStockQuote(Ticker) {
-
+function getStockQuote(ticker) {
+	let url = `http://finance.google.com/finance/info?client=ig&q=${ticker}`;
+	request.get(url, {}, (err, response, data) => {
+		console.log(response);
+		console.log(`\n\n\n ${data}`);
+	});
 }
 
 function reply() {
