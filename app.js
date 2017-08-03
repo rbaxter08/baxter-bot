@@ -40,6 +40,8 @@ app.post('/hello', (req, res, next) => {
 app.get('/oauth*', (req, res, next) => {
 	console.log('recieved oauth!');
 	console.log(req);
+	console.log('response:  \n');
+	console.log(res);
 });
 
 // request.post(`https://slack.com/api/rtm.connect?token=${token}&scope=${scope}`, {}, (err, response, data) => {
