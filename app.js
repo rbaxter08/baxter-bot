@@ -60,13 +60,13 @@ function getStockQuote(ticker) {
 	console.log(`Sending request for ticker ${ticker}`);
 	let url = `http://finance.google.com/finance/info?client=ig&q=${ticker}`;
 	request.get(url, {}, (err, response, data) => {
-		console.log(response);
-		console.log(`data:\n\n\n ${data}`);
+		let quote = JSON.parse(data);
+		replyStock(quote);
 	});
 }
 
-function reply() {
-
+function replyStock(quote) {
+	let msg = `Ticker: ${quote.t} Current Price: ${quote.l}`;
 }
 
 launchWebSocket();
