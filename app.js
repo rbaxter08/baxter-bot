@@ -47,6 +47,7 @@ function launchWebSocket() {
 		ws = new WebSocket(url);
 		ws.on('message', (res) => {
 			let event = JSON.parse(res);
+			console.log(event);
 			let msg = event.text;
 			if (_.startsWith(msg, '$')) {
 				let regex = new RegExp(/(\$)([a-zA-Z]*)/);
@@ -70,6 +71,9 @@ function getStockQuote(ticker) {
 function replyStock(quote) {
 	let msg = `Ticker: ${quote.t} Current Price: ${quote.l}`;
 	console.log(msg);
+
+	let url = `https://slack.com/api/chat.postMessage?token=${TOKEN_BOT}&channel=${}&text=${msg}`;
 }
+
 
 launchWebSocket();
