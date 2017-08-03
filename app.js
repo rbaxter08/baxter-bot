@@ -44,8 +44,12 @@ function launchWebSocket() {
 	request.post(url, {}, (err, response, data) => {
 		let url = JSON.parse(data).url;
 		ws = new WebSocket(url);
-		ws.on('message', (data) => {
-			console.log('New Message!  \n' + data);
+		ws.on('message', (res) => {
+			let data = JSON.parse(res);
+			let msg = data.text;
+			if (_.startsWith(msg, '$')) {
+				console.log('Now I\'ll retrieve Stock price!!');
+			}
 		});
 	});
 }
