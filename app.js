@@ -2,15 +2,17 @@ const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
 const WebSocket = require('ws');
-const ws;
 
-//const TOKEN = 'xoxp-26503446353-214024588853-214047871506-82c88ebdbc46753600ea689e9084991e';
 const TOKEN_BOT ='xoxb-214939346278-FWmSHRdjF1rw91KU0PJAJmQd';
 const SCOPE = 'client';
 const CLIENT_ID = '26503446353.214933754470';
 const CLIENT_SECRET = '49b8fea646167daefd4f535084abd45f';
 const REDIRECT = 'https://baxter-bot.herokuapp.com/';
 const VERIFICATION_TOKEN = 'tkPGmSRMWtxlWjw1rJZ0PsyP';
+
+
+
+let ws;
 
 let app = express();
 let port = process.env.PORT || 1337;
