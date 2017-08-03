@@ -10,8 +10,6 @@ const CLIENT_SECRET = '49b8fea646167daefd4f535084abd45f';
 const REDIRECT = 'https://baxter-bot.herokuapp.com/';
 const VERIFICATION_TOKEN = 'tkPGmSRMWtxlWjw1rJZ0PsyP';
 
-
-
 let ws;
 
 let app = express();
@@ -40,8 +38,9 @@ app.post('/hello', (req, res, next) => {
 	}
 });
 
-function launchWebSOcket() {
+function launchWebSocket() {
 	let url = `https://slack.com/api/rtm.connect?token=${TOKEN_BOT}`;
+	console.log('Retrieving Web Socket...')
 	request.post(url, {}, (err, response, data) => {
 		let url = response.url;
 		console.log(`Connecting to ws: ${url}`)
@@ -52,17 +51,4 @@ function launchWebSOcket() {
 	});
 }
 
-launchWebSOcket();
-
-
-
-// request.post(`https://slack.com/api/rtm.connect?token=${token}&scope=${scope}`, {}, (err, response, data) => {
-// 	console.log(data);
-// });
-// request({
-// 	method: 'GET',
-// 	url: `https://slack.com/oauth/authorize?client_id=${client_id}&scope=${scope}`
-// }, (err, response, data) => {
-// 	console.log(response);
-// 	console.log(data);
-// });
+launchWebSocket();
