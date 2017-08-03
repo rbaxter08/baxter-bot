@@ -1,7 +1,8 @@
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
-const io = require('socket.io');
+const WebSocket = require('ws');
+const ws;
 
 //const TOKEN = 'xoxp-26503446353-214024588853-214047871506-82c88ebdbc46753600ea689e9084991e';
 const TOKEN_BOT ='xoxb-214939346278-FWmSHRdjF1rw91KU0PJAJmQd';
@@ -41,8 +42,8 @@ app.post('/hello', (req, res, next) => {
 function launchWebSOcket() {
 	let url = `https://slack.com/api/rtm.connect?token=${TOKEN_BOT}`;
 	request.post(url, {}, (err, response, data) => {
-		let socket = io.connect(response.url);
-		socket.on('new_message', (data) => {
+		ws = new WebSocket(response.url);
+		ws.on('message', (data) => {
 			console.log('New Message!  \n' + data);
 		});
 	});
