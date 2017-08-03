@@ -30,6 +30,7 @@ app.post('/hello', (req, res, next) => {
 });
 
 app.post('/oauth', (req, res, next) => {
+	console.log('recieved oauth!');
 	console.log(req.body);
 });
 
