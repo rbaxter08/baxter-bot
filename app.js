@@ -60,7 +60,8 @@ function getStockQuote(ticker) {
 	console.log(`Sending request for ticker ${ticker}`);
 	let url = `http://finance.google.com/finance/info?client=ig&q=${ticker}`;
 	request.get(url, {}, (err, response, data) => {
-		console.log(data[0]);
+		console.log(typeof data);
+		console.log(data);
 		//jlet quote = JSON.parse(data[0]);
 		replyStock(quote);
 	});
