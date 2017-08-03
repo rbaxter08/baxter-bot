@@ -49,10 +49,13 @@ function launchWebSocket() {
 		ws.on('message', (res) => {
 			let data = JSON.parse(res);
 			let msg = data.text;
+			console.log(msg);
 			if (_.startsWith(msg, '$')) {
 				let regex = new RegExp(/(\$)([a-zA-Z]*)/);
-				let ticker = msg.match(regex)[2];
-				gStocks([ticker]).then(err, data => {
+				let ticker = msg.match(regex);
+				console.log(ticker);
+				gStocks([ticker[2]]).then(err, data => {
+					console.log(err);
 					console.log(data);
 				});
 				
