@@ -3,6 +3,7 @@ const request = require('request');
 const bodyParser = require('body-parser');
 const WebSocket = require('ws');
 const _ = require('lodash');
+const gStocks = require('google-stocks');
 
 const TOKEN_BOT ='xoxb-214939346278-FWmSHRdjF1rw91KU0PJAJmQd';
 const SCOPE = 'client';
@@ -49,10 +50,23 @@ function launchWebSocket() {
 			let data = JSON.parse(res);
 			let msg = data.text;
 			if (_.startsWith(msg, '$')) {
-				console.log('Now I\'ll retrieve Stock price!!');
+				let regex = new RegExp(/(\$)([a-zA-Z]*)/);
+				let ticker = msg.match(regex)[2];
+				gStocks([ticker]).then(err, data => {
+					console.log(data);
+				});
+				
 			}
 		});
 	});
+}
+
+function getStockQuote(Ticker) {
+
+}
+
+function reply() {
+
 }
 
 launchWebSocket();
