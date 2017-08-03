@@ -41,9 +41,11 @@ app.post('/hello', (req, res, next) => {
 function launchWebSOcket() {
 	let url = `https://slack.com/api/rtm.connect?token=${TOKEN_BOT}`;
 	request.post(url, {}, (err, response, data) => {
-		console.log(response);
+		let socket = io.connect(response.url);
+		socket.on('new_message', (data) => {
+			console.log('New Message!  \n' + data);
+		});
 	});
-
 }
 
 launchWebSOcket();
