@@ -3,7 +3,6 @@ const request = require('request');
 const bodyParser = require('body-parser');
 const WebSocket = require('ws');
 const _ = require('lodash');
-const gStocks = require('google-stocks');
 
 const TOKEN_BOT ='xoxb-214939346278-FWmSHRdjF1rw91KU0PJAJmQd';
 const SCOPE = 'client';
@@ -47,29 +46,22 @@ function launchWebSocket() {
 		let url = JSON.parse(data).url;
 		ws = new WebSocket(url);
 		ws.on('message', (res) => {
-			let data = JSON.parse(res);
-			let msg = data.text;
-			console.log(msg);
+			let msg = JSON.parse(res).text;
 			if (_.startsWith(msg, '$')) {
 				let regex = new RegExp(/(\$)([a-zA-Z]*)/);
 				let ticker = msg.match(regex)[2];
-				console.log(`Sending request for ticker ${ticker}`);
-				getStockQuote(ticker);
-				gStocks([ticker]).then(err, data => {
-					console.log(`error!: ${err}`);
-					console.log(`data!: ${data}`);
-				});
-				
+				getStockQuote(ticker);				
 			}
 		});
 	});
 }
 
 function getStockQuote(ticker) {
+	console.log(`Sending request for ticker ${ticker}`);
 	let url = `http://finance.google.com/finance/info?client=ig&q=${ticker}`;
 	request.get(url, {}, (err, response, data) => {
 		console.log(response);
-		console.log(`\n\n\n ${data}`);
+		console.log(`data:\n\n\n ${data}`);
 	});
 }
 
