@@ -39,7 +39,7 @@ app.post('/hello', (req, res, next) => {
 
 app.get('/oauth', (req, res, next) => {
 	console.log('recieved oauth!');
-	console.log(req.body);
+	console.log(req);
 });
 
 function authorizeApp() {
