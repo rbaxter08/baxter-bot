@@ -73,6 +73,7 @@ function replyStock(quote, channel) {
 	console.log(msg);
 
 	let url = `https://slack.com/api/chat.postMessage?token=${TOKEN_BOT}&channel=${channel}&text=${msg}`;
+	request.post(url);
 }
 
 
