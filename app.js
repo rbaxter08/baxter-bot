@@ -45,8 +45,8 @@ function launchWebSocket() {
 		let url = response;
 		console.log(`Connecting to ws: ${url}`)
 		console.log(`data = ${data}`);
-		ws = new WebSocket(url);
-		ws.on('message', (data) => {
+		//ws = new WebSocket(url);
+		//ws.on('message', (data) => {
 			console.log('New Message!  \n' + data);
 		});
 	});
