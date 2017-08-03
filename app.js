@@ -61,10 +61,11 @@ function getStockQuote(ticker) {
 	let url = `http://finance.google.com/finance/info?client=ig&q=${ticker}`;
 	request.get(url, {}, (err, response, data) => {
 		let regex = new RegExp(/(\/\/ )([\s\S]*)/);
-		let meta = msg.match(regex)[2];
-		console.log(JSON.parse(meta));
-		let quote = JSON.parse(meta);
-		replyStock(quote);
+		let meta = msg.match(regex);
+		console.log(meta);
+		// console.log(JSON.parse(meta));
+		// let quote = JSON.parse(meta);
+		// replyStock(quote);
 	});
 }
 
