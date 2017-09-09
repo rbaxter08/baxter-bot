@@ -1,6 +1,7 @@
 'use strict';
 
 const rm = require('./requestMaker.service.js');
+const _ = require('lodash');
 
 //FINANCE API
 const STOCK_TOKEN = 'IEL16DD3KAO0D7H6';
