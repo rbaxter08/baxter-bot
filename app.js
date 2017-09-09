@@ -31,36 +31,14 @@ app.listen(port, () => {
 	console.log('Listening on port ' + port);
 });
 
-app.post('/hello', (req, res, next) => {
-	let userName = req.body.user_name;
-	let botPayload = {
-		text: `test ${userName}`,
-	};
-
-	if (userName !== 'baxterbot') {
-		return res.status(200).json(botPayload);
-	} else {
-		return res.status(200).end();
-	}
-});
-
 app.get('/spotify/token', (req, res) => {
 	if (req && req.query && req.query.code) {
-		Spotify.getAccessToken(req.query.code).catch((err) => {
-			console.log(err);
-		});
+		Spotify.setAuthCode(req.query.code);
+		Spotify.fetchAccessToken();
 	} else {
 		console.log('error fetching spotify token');
 	}
 	res.status(200).send('SPOTIFY!');
-});
-
-app.get('/spotify/access', (req, res) => {
-	console.log('HELLO');
-	if (req && req.query && req.query.code) {
-	} else {
-		console.log('error fetching spotify token');
-	}
 });
 
 function launchWebSocket() {
@@ -70,23 +48,28 @@ function launchWebSocket() {
 		let url = JSON.parse(data).url;
 		ws = new WebSocket(url);
 		ws.on('message', (res) => {
-			let event = JSON.parse(res);
-			console.log(event);
-			let msg = event.text;
+			const event = JSON.parse(res);
+			const msg = event.text;
+			const channel = event.channel;
+
 			if (_.startsWith(msg, '$')) {
-				let regex = new RegExp(/(\$)([a-zA-Z]*)/);
-				let ticker = msg.match(regex)[2];
-				getStockQuote(ticker, event.channel);
+				const regex = new RegExp(/(\$)([a-zA-Z]*)/);
+				const ticker = msg.match(regex)[2];
+				Stock.getQuote(ticker).then((resp) => {
+					Slack.replyStock(resp, channel);
+				}, (err) => {
+					console.log(err);
+					Slack.reply('BAXTER FUCKED UP :gotem:', channel);
+				});
 			} else if (_.startsWith(msg, '<https://open.spotify.com')) {
-				Spotify.getToken();
+				Spotify.addSong(msg).then(resp => {
+					Slack.reply('Song added', channel);
+				}, err => {
+					console.log('oops, song add fail');
+					Slack.reply('Baxter fucked up! :gotem:');
+				});
 			}
 		});
-	});
-}
-
-function getStockQuote(ticker, channel) {
-	Stock.getQuote(ticker).then((resp) => {
-		Slack.replyStock(resp, channel);
 	});
 }
 

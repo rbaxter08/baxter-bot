@@ -11,7 +11,8 @@ class Slack {
    }
 
    reply(msg, channel) {
-    return rm.http('post', {
+    return rm.http({
+        method: 'POST',
         url: `https://slack.com/api/chat.postMessage?token=${TOKEN_BOT}&channel=${channel}&text=${msg}`,
     });
    }
