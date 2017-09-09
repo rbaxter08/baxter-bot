@@ -56,7 +56,7 @@ function launchWebSocket() {
 				const regex = new RegExp(/(\$)([a-zA-Z]*)/);
 				const ticker = msg.match(regex)[2];
 				Stock.getQuote(ticker).then((resp) => {
-					Slack.replyStock(resp, channel);
+					Slack.reply('', channel, resp);
 				}, (err) => {
 					console.log(err);
 					Slack.reply('BAXTER FUCKED UP :gotem:', channel);

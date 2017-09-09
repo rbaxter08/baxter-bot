@@ -19,6 +19,13 @@ class RequestMaker {
     };
     return this.http(requestObj);
   }
+
+  fetchHistorical(ticker) {
+    return this.http({
+      uri: `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&interval=1min&apikey=${STOCK_TOKEN}`,
+      json: true,
+    });
+  }
 }
 
 module.exports = new RequestMaker();
