@@ -48,15 +48,16 @@ class Stock {
   }
 
   formatStockData(timeSeries) {
-    return _.chain(timeSeries)
-            .map((series, key) => {
-              _.extend(series, {
-                timeStamp: key,
-              });
-              return series;
-            })
-            .orderBy(['timeStamp'], ['desc'])
-            .value();
+    let results = _.chain(timeSeries)
+                   .map((series, key) => {
+                     _.extend(series, {
+                       timeStamp: key,
+                     });
+                     return series;
+                   })
+                   .orderBy(['timeStamp'], ['desc'])
+                   .value();
+    return results;
   }
 
   getCompanyName(ticker) {
@@ -69,8 +70,6 @@ class Stock {
   }
 
   formatForSlack(data) {
-    console.log('formatting...');
-    console.log(data);
     return [
       {
         pretext: `${data.company} - $${data.price} usd`,

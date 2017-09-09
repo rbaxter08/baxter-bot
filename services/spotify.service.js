@@ -30,8 +30,6 @@ class Spotify {
     let regex = new RegExp(/(track\/)(.+)(>)/);
     let songID = songURI.match(regex)[2];
     let uri = `https://api.spotify.com/v1/users/${USER_ID}/playlists/${PLAYLIST_ID}/tracks?position=0&uris=spotify:track:${songID}`;
-    console.log(uri);
-    console.log(songID);
     return rm.http({
       method: 'POST',
       uri: uri,
