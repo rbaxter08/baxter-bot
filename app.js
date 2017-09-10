@@ -57,16 +57,10 @@ function launchWebSocket() {
 				const ticker = msg.match(regex)[2];
 				Stock.getQuote(ticker).then((resp) => {
 					Slack.reply('', channel, resp);
-				}, (err) => {
-					console.log(err);
-					Slack.reply('BAXTER FUCKED UP :gotem:', channel);
 				});
 			} else if (_.startsWith(msg, '<https://open.spotify.com')) {
 				Spotify.addSong(msg).then(resp => {
 					Slack.reply('Song added', channel);
-				}, err => {
-					console.log('oops, song add fail');
-					Slack.reply('Baxter fucked up! :gotem:');
 				});
 			}
 		});

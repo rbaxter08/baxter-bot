@@ -9,7 +9,9 @@ class RequestMaker {
   }
 
   http(requestObj) {
-    return rp(requestObj);
+    return rp(requestObj).catch(err => {
+      console.log(err);
+    });
   }
 
   fetchTicker(ticker) {
